@@ -1,0 +1,8 @@
+######################################################################################
+## This includes all the modules and the fixed version dependencies for development ##
+######################################################################################
+
+Flask==2.3.1
+pytest==7.3.1
+python-dateutil==2.8.2
+

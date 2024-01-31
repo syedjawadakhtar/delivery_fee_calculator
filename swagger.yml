@@ -1,0 +1,53 @@
+    openapi: 3.0.0
+    info:
+      title: Delivery Calculator API
+      description:     A HTTP API used to calculate the delivery cost for customers shopping on the Wolt Application. It uses Python Flask for the API and Pytest for unit testing. The API can run on Postman as well as the command line. 
+      version: 1.0.0
+    servers:
+      - url: http://api.example.com/v1
+        description: production server
+      - url: http://staging-api.example.com
+        description: Staging server for testing
+    paths:
+      /cart:
+        post:
+          summary: Calculate delivery fees based on cart information.
+          description: |
+              This single POST endpoint takes data from the request payload (JSON) with values such as cart_value, delivery_distance, number_of_items, and time. It is used to calculate the effective delivery fees that will be shown to the user.          responses:
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    cart_value:
+                      type: number
+                    delivery_distance:
+                      type: number
+                    number_of_items:
+                      type: integer
+                    time:
+                      type: string
+                      format: date-time
+                  required:
+                    - cart_value
+                    - delivery_distance
+                    - number_of_items
+                    - time
+            responses:
+              '200':   
+                description: A JSON response of the total delivery fees
+                content:
+                  application/json:
+                    schema: 
+                      type: object
+                      items: 
+                        type: number
+              '400':   
+                description: Error responce when any of the data provided is not in the correct format
+                content:
+                  application/json:
+                    schema: 
+                      type: object
+                      items: 
+                        type: string
